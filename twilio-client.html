@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voice Assistant</title>
+  <script src="https://sdk.twilio.com/js/client/v1.13/twilio.min.js"></script>
+</head>
+<body>
+  <h2>Click to Start Voice Call</h2>
+  <button onclick="startCall()">Call</button>
+
+  <script>
+    async function startCall() {
+      const res = await fetch('/token');
+      const data = await res.json();
+      Twilio.Device.setup(data.token);
+      Twilio.Device.ready(() => {
+        Twilio.Device.connect();
+      });
+    }
+  </script>
+</body>
+</html>
+
